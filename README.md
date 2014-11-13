@@ -1,4 +1,4 @@
-algorithms
+Algorithms
 ==========
 
 This program is developed only
