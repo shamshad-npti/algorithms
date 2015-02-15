@@ -5,13 +5,13 @@
  */
 package sorting;
 
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 
 /**
  *
- * @author shamshad
+ * @author Shamshad Alam
  */
 public class Radix implements Sort<Integer> {
     private int bound;
@@ -22,18 +22,21 @@ public class Radix implements Sort<Integer> {
     
     @Override
     public void sort(Integer[] elements, Comparator<Integer> comparator) {
-        int bl = 8, bs = 1 << bl, t = 0;
-        Queue<Integer>[] buckets = new Queue[bs];
+        int bl = 12, bs = 1 << bl, t = 0;
+        List<Integer>[] buckets = new List[bs];
         for (int i = 0; i < bs; i++)
-            buckets[i] = new LinkedList<>();
+            buckets[i] = new ArrayList<>();
         int base = 0, length = elements.length;
         while(bound > (1 << base - 1)) {
             for (int i = 0; i < length; i++)
-                buckets[(elements[i] >> base) & (bs - 1)].offer(elements[i]);
+                buckets[(elements[i] >> base) & (bs - 1)].add(elements[i]);
             int k = 0;
-            for (int i = 0; i < bs; i++) 
-                while(!buckets[i].isEmpty())
-                    elements[k++] = buckets[i].remove();
+            for (int i = 0; i < bs; i++) {
+                for (Integer bucket : buckets[i]) 
+                    elements[k++] = bucket;
+                //buckets[i].clear();
+                buckets[i] = new ArrayList<>();
+            }
             base = (++t) * bl;
         }
     }
