@@ -10,7 +10,7 @@
  * to store graph instead of array. Moreover
  * program will be very much slow
  */
-package practice;
+package algorithm;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;

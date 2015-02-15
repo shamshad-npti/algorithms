@@ -34,7 +34,6 @@ public class Radix implements Sort<Integer> {
             for (int i = 0; i < bs; i++) {
                 for (Integer bucket : buckets[i]) 
                     elements[k++] = bucket;
-                //buckets[i].clear();
                 buckets[i] = new ArrayList<>();
             }
             base = (++t) * bl;
