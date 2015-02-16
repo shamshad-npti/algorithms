@@ -3,7 +3,10 @@ package searching;
 import java.util.Comparator;
 
 /**
- *
+ * Algorithm: Binary Search
+ * Input: Sorted Array <a1, a2, a3, ... an>, elem to find
+ * Output: Index i of the element if it exists in array -1 otherwise
+ * Time Complexity: O(lg(n))
  * @author shamshad
  */
 public class BinarySearch<T> implements Search<T> {
