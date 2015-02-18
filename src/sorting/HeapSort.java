@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 /**
  *
- * @author shame
+ * @author Shamshad Alam
  */
 public class HeapSort<T> implements Sort<T> {
     @Override

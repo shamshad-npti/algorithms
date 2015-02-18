@@ -15,9 +15,9 @@ import java.util.Objects;
 public class LinearSearch<T> implements Search<T> {
 
     @Override
-    public int find(T[] elements, T elem, int start, Comparator<T> predicate) {
+    public int find(T[] elements, T elem, int start, int end, Comparator<T> predicate) {
         if(predicate != null) {
-            for (int i = start; i < elements.length; i++)
+            for (int i = start; i <= end; i++)
                 if(predicate.compare(elem, elements[i]) == 0)
                     return i;
         } else {
