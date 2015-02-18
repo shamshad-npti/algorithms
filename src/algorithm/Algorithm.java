@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import sorting.Test;
 
 /**
  *
@@ -34,12 +33,7 @@ public class Algorithm extends Application {
         primaryStage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) throws Exception {
-        Test.start();
         System.exit(0);
     }
-    
 }
