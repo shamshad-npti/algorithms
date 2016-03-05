@@ -1,6 +1,9 @@
 package algorithm;
 
 import ds.tree.RedBlackTree;
+import dsp.Complex;
+import dsp.FFT;
+import java.util.Arrays;
 import java.util.Random;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -11,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import matrix.Matrix;
 
 /**
  *
@@ -61,7 +65,23 @@ public class Algorithm extends Application {
     }
 
     public static void main(String[] args) throws Exception {
-        launch(args);
+        double[] d = new double[100000];
+        for(int i = 0; i < d.length; i++) {
+            d[i] = (int)(100 * Math.random());
+        }
+        Complex[] complex = FFT.FFT(d, 1 << 20);
+        //System.out.println(Arrays.toString(complex));
+        Complex[] inv = FFT.IFFT(complex, 1 << 20);
+        //System.out.println(Arrays.toString(inv));
+        for(int i = 0; i < d.length; i++) {
+            if(!equals(d[i], inv[i].len(), 1e-8)) {
+                System.out.println("Error" + i);
+            }
+        }
         System.exit(0);
+    }
+    
+    public static boolean equals(double d1, double d2, double eps) {
+        return (d1 - eps) < d2 && d2 < (d1 + eps);
     }
 }
