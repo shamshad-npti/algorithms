@@ -29,7 +29,4 @@ public interface VEBTree {
     public boolean delete(int x);
     public int size();
     public boolean contains(int x);
-    public default boolean isEmpty() {
-        return size() == 0;
-    };
 }
