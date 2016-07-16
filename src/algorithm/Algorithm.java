@@ -4,6 +4,7 @@ import ds.tree.RedBlackTree;
 import dsp.Complex;
 import dsp.FFT;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import matrix.Matrix;
+import str.UkkonenAlgo;
 
 /**
  *
@@ -63,19 +65,33 @@ public class Algorithm extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-    public static void main(String[] args) throws Exception {
-        double[] d = new double[100000];
-        for(int i = 0; i < d.length; i++) {
-            d[i] = (int)(100 * Math.random());
+    private static String randomString(int length) {
+        int a = 'a';
+        Random r = new Random();
+        StringBuilder b = new StringBuilder();
+        for(int i = 0; i < length; i++) {
+            char c = (char) (a + r.nextInt(26));
+            b.append(c);
         }
-        Complex[] complex = FFT.FFT(d, 1 << 20);
-        //System.out.println(Arrays.toString(complex));
-        Complex[] inv = FFT.IFFT(complex, 1 << 20);
-        //System.out.println(Arrays.toString(inv));
-        for(int i = 0; i < d.length; i++) {
-            if(!equals(d[i], inv[i].len(), 1e-8)) {
-                System.out.println("Error" + i);
+        b.append('`');
+        return b.toString();
+    }
+    
+    public static void main(String[] args) throws Exception {
+        int size = 100000;
+        String s = "aaaa`";//"aabbaabbccaabbccd";//randomString(size);
+        List<Integer> suffix = UkkonenAlgo.toSuffixArray(s);
+        System.out.println(suffix);
+        System.out.println("Verifying Solution");
+        for(int i = 1; i < s.length(); i++) {
+            String s1 = s.substring(suffix.get(i - 1));
+            String s2 = s.substring(suffix.get(i));
+            System.out.println(s1);
+            if(s1.compareTo(s2) > 0) {
+                System.out.println("Error");
+                System.out.println(s1);
+                System.out.println(s2);
+                break;
             }
         }
         System.exit(0);
